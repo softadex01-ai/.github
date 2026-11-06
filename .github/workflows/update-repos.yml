@@ -1,0 +1,99 @@
+name: Sync Organization Repositories
+
+on:
+  schedule:
+    # Run once daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5.3.0
+        with:
+          python-version: '3.11'
+
+      - name: Fetch Latest Public Repositories
+        env:
+          GH_ORG: ${{ github.repository_owner }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          import json
+          import os
+          import urllib.request
+          import re
+
+          org = os.environ.get("GH_ORG")
+          token = os.environ.get("GH_TOKEN")
+          url = f"https://api.github.com/orgs/{org}/repos?type=public&sort=updated&per_page=5"
+
+          req = urllib.request.Request(url)
+          req.add_header("User-Agent", "Softadex-Profile-Updater")
+          req.add_header("Accept", "application/vnd.github.v3+json")
+          if token:
+              req.add_header("Authorization", f"Bearer {token}")
+
+          try:
+              with urllib.request.urlopen(req) as response:
+                  repos = json.loads(response.read().decode())
+          except Exception as e:
+              print(f"Failed to fetch repos: {e}. Exiting cleanly.")
+              exit(0)
+
+          # Filter out the .github repo itself and forks if desired
+          filtered_repos = [r for r in repos if r["name"] != ".github" and not r.get("fork", False)]
+
+          if not filtered_repos:
+              print("No external public repositories found to update.")
+              exit(0)
+
+          table_lines = [
+              "| Project | Overview | Stack | Repository |",
+              "| :--- | :--- | :--- | :--- |"
+          ]
+
+          for r in filtered_repos[:4]:
+              name = f"**{r['name']}**"
+              desc = r["description"] or "Digital product / open-source tool by Softadex"
+              # Clean description of markdown characters
+              desc = desc.replace("|", "-").strip()
+              lang = r.get("language") or "Fullstack"
+              link = f"[{r['name']}]({r['html_url']})"
+              table_lines.append(f"| {name} | {desc} | {lang} | {link} |")
+
+          new_table = "\n".join(table_lines)
+
+          readme_path = ".github/profile/README.md"
+          with open(readme_path, "r", encoding="utf-8") as f:
+              content = f.read()
+
+          pattern = r"(<!-- REPOS_LIST_START -->)(.*?)(<!-- REPOS_LIST_END -->)"
+          replacement = f"\\1\n{new_table}\n\\3"
+          updated_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+
+          with open(readme_path, "w", encoding="utf-8") as f:
+              f.write(updated_content)
+
+        shell: python
+
+      - name: Commit and push updates if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/profile/README.md
+          if git diff --staged --quiet; then
+            echo "No changes in repositories list."
+          else
+            git commit -m "chore(profile): synchronize latest organization repositories [skip ci]"
+            git push
+          fi
