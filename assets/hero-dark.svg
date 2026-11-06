@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="100%" height="340" fill="none">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="30%" r="80%" fx="50%" fy="30%">
+      <stop offset="0%" stop-color="#111625" />
+      <stop offset="60%" stop-color="#08090C" />
+      <stop offset="100%" stop-color="#050608" />
+    </radialGradient>
+
+    <!-- Subtle Radial Glow behind logo -->
+    <radialGradient id="ambientGlow" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#4F7BFE" stop-opacity="0.22" />
+      <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#08090C" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="dotGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#1E2638" fill-opacity="0.7" />
+    </pattern>
+
+    <!-- Linear Accent for Logo & Text -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="50%" stop-color="#4F7BFE" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Surface Background -->
+  <rect width="1200" height="340" rx="16" fill="url(#bgGrad)" />
+  <rect width="1200" height="340" rx="16" fill="url(#dotGrid)" />
+  <rect width="1200" height="340" rx="16" fill="url(#ambientGlow)" />
+  <rect width="1200" height="340" rx="16" stroke="#1E2333" stroke-width="1.5" />
+
+  <!-- Top Technical Status Pill -->
+  <g transform="translate(600, 48)">
+    <rect x="-185" y="-14" width="370" height="28" rx="14" fill="#0E131F" stroke="#1E283D" stroke-width="1" />
+    <circle cx="-165" cy="0" r="3.5" fill="#38BDF8">
+      <animate attributeName="opacity" values="1;0.4;1" dur="2.4s" repeatCount="indefinite" />
+    </circle>
+    <text x="-150" y="4" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', monospace" font-size="11" font-weight="600" letter-spacing="1.2">STUDIO ARCHITECTURE &amp; DIGITAL CRAFT</text>
+  </g>
+
+  <!-- Studio Emblem (Geometric Modern Monogram S) -->
+  <g transform="translate(600, 126)">
+    <!-- Hex / Diamond Isometric Nodes -->
+    <path d="M-26 -16 L0 -32 L26 -16 L26 16 L0 32 L-26 16 Z" stroke="url(#primaryGrad)" stroke-width="2.5" stroke-linejoin="round" fill="#0C101B" />
+    <path d="M-14 -8 L0 -16 L14 -8 L0 0 Z" fill="url(#primaryGrad)" fill-opacity="0.9" />
+    <path d="M0 0 L14 -8 L14 8 L0 16 Z" fill="#38BDF8" fill-opacity="0.75" />
+    <path d="M-14 -8 L0 0 L0 16 L-14 8 Z" fill="#2557EB" fill-opacity="0.85" />
+  </g>
+
+  <!-- Wordmark -->
+  <text x="600" y="210" text-anchor="middle" fill="url(#textGrad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif" font-size="44" font-weight="800" letter-spacing="-1.5">SOFTADEX</text>
+
+  <!-- Tagline -->
+  <text x="600" y="244" text-anchor="middle" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif" font-size="15" font-weight="450" letter-spacing="0.2">Next-generation web &amp; mobile experiences, engineered for scale.</text>
+
+  <!-- Bottom Technical Metas -->
+  <g transform="translate(600, 292)">
+    <text x="0" y="0" text-anchor="middle" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" letter-spacing="1.5">24.8607&#176; N, 67.0011&#176; E  //  KARACHI, PK  &bull;  AVAILABLE FOR COMMISSION</text>
+  </g>
+</svg>
