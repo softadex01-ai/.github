@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64" fill="none">
+  <!-- Isometric Monogram Icon -->
+  <g transform="translate(32, 32)">
+    <path d="M-18 -11 L0 -22 L18 -11 L18 11 L0 22 L-18 11 Z" stroke="#2557EB" stroke-width="2" stroke-linejoin="round" fill="#FFFFFF" />
+    <path d="M-10 -5 L0 -11 L10 -5 L0 0 Z" fill="#2557EB" />
+    <path d="M0 0 L10 -5 L10 5 L0 11 Z" fill="#0EA5E9" />
+    <path d="M-10 -5 L0 0 L0 11 L-10 5 Z" fill="#1D4ED8" />
+  </g>
+  <!-- Text Lockup -->
+  <text x="70" y="36" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif" font-size="22" font-weight="800" letter-spacing="-0.8">SOFTADEX</text>
+  <text x="70" y="49" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif" font-size="9.5" font-weight="600" letter-spacing="1.5">DIGITAL STUDIO</text>
+</svg>
